@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>TrumpTalk</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <style>
+    #existing {
+      margin-top: 20px;
+      display: inline-block;
+      text-decoration: none;
+      color: white;
+      background-color: #007bff;
+      padding: 10px 15px;
+      border-radius: 4px;
+      position: fixed;
+      top: 50px;
+      right: 50%;
+      transform: translateX(50%);
+      font-size: 1.2em;
+      transition: background-color 0.3s ease-in-out;
+    }
+    #existing:hover {
+      background-color: #0056b3;
+      font-weight: bold
+    }
+
+    </style>
+</head>
+<body>
+  <div class="container">
+    <h1>TrumpTalk</h1>
+    <a id="existing" href="/search" class="button">Search Existing Transcripts</a>
+    <form method="post" onsubmit="showLoading()">
+      <input type="url" name="video_url" placeholder="Paste YouTube URL" required>
+      <button type="submit">Transcribe</button>
+    </form>
+    <p id="loading" class="loading">Downloading and transcribing, this may take a while...</p>
+  </div>
+  <script>
+    function showLoading() {
+      document.getElementById("loading").style.display = "block";
+    }
+  </script>
+</body>
+</html>
+<!-- This is the main page of the TrumpTalk application -->

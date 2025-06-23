@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Transcript Search</title>
+    <style>
+        body {
+            background-color: #121212;
+            color: #ffffff;
+            font-family: 'Segoe UI', sans-serif;
+            padding: 20px;
+        }
+        h1 { margin-bottom: 10px; }
+        input, button {
+            padding: 10px;
+            margin: 5px 0;
+            background: #1f1f1f;
+            border: 1px solid #444;
+            color: white;
+            width: 100%;
+        }
+        .segment {
+            background: #1e1e1e;
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 6px;
+            transition: background 0.3s ease;
+        }
+        .segment:hover {
+            background: #2e2e2e;
+        }
+        .meta {
+            font-size: 0.9em;
+            color: #aaa;
+        }
+        a.download {
+            color: #90caf9;
+        }
+    </style>
+</head>
+<body>
+    <h1>Search Transcript</h1>
+    <form action="{{ url_for('search') }}" method="post">
+        <input type="text" name="term" placeholder="Search term">
+        <button type="submit">Search</button>
+    </form>
+    <hr>
+    {% for seg in results %}
+    <div class="segment">
+        <div class="meta">📹 {{ seg[1] }}<br>🕒 {{ seg[2]|float|round(2) }} → {{ seg[3]|float|round(2) }}</div>
+        <p>{{ seg[4] }}</p>
+        <a class="download" href="{{ url_for('clip', segment_id=seg[0]) }}">⬇ Download Clip</a>
+    </div>
+    {% endfor %}
+</body>
+</html>
