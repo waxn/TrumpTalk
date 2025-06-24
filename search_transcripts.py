@@ -7,7 +7,7 @@ def search(term):
     cur = conn.cursor()
 
     query = """
-    SELECT file, start, end, text FROM segments
+    SELECT DISTINCT file, start, end, text FROM segments
     WHERE text LIKE ?
     ORDER BY file, start
     """
