@@ -7,7 +7,7 @@ def search(term):
     cur = conn.cursor()
 
     query = """
-    SELECT file, start, end, text FROM segments
+    SELECT DISTINCT file, start, end, text FROM segments
     WHERE text LIKE ?
     ORDER BY file, start
     """
@@ -29,7 +29,3 @@ if __name__ == "__main__":
         if term.lower() == 'q':
             break
         search(term)
-
-results = db.search_segments(term)
-# Each result should include the keyword (search term used)
-results = [(r.id, r.file, r.start, r.end, r.text, term) for r in results]

@@ -32,7 +32,7 @@ def search():
     if term:
         conn = sqlite3.connect(DB_PATH)
         cur = conn.cursor()
-        cur.execute("SELECT id, file, start, end, text FROM segments WHERE text LIKE ?", (f"%{term}%",))
+        cur.execute("SELECT MIN(id), file, start, end, text FROM segments WHERE text LIKE ? GROUP BY file, start, end, text ORDER BY file, start", (f"%{term}%",))
         results = cur.fetchall()
         conn.close()
     return render_template("results.html", results=results, term=term)
